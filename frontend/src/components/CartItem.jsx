@@ -20,55 +20,56 @@ function CartItem({ item, index = 0 }) {
 
   return (
     <div
-      className="group flex animate-fade-up flex-col gap-4 border-b border-white/5 py-5 last:border-b-0 sm:flex-row"
+      className="group flex animate-fade-up flex-col gap-5 border-b border-gold-500/10 py-6 last:border-b-0 sm:flex-row"
       style={{ animationDelay: `${index * 70}ms` }}
     >
       <Link
         to={`/products/${product._id}`}
-        className="h-28 w-full shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 sm:w-36"
+        className="product-stage h-32 w-full shrink-0 border border-gold-500/20 sm:w-40"
       >
         <img
           src={product.image}
           alt={product.name}
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+          className="h-full w-full object-contain p-3 transition duration-700 group-hover:scale-110"
         />
       </Link>
 
-      <div className="flex flex-1 flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-4">
         <div className="flex items-start justify-between gap-4">
           <div>
             <Link
               to={`/products/${product._id}`}
-              className="font-display text-lg font-semibold text-white transition hover:text-fuchsia-300"
+              className="font-display text-xl font-semibold text-ivory transition hover:text-gold-300"
             >
               {product.name}
             </Link>
-            <p className="text-sm text-slate-400">{formatPrice(product.price)} each</p>
+            <p className="mt-1 text-sm text-stone-500">{formatPrice(product.price)} each</p>
           </div>
-          <p className="font-display text-xl font-bold text-white">
-            {formatPrice(product.price * quantity)}
-          </p>
+          <p className="text-xl font-semibold text-gold-300">{formatPrice(product.price * quantity)}</p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1">
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center border border-gold-500/30">
             <button
               type="button"
               onClick={decrease}
               disabled={pending || quantity <= 1}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30"
+              className="flex h-10 w-10 items-center justify-center text-lg text-ivory transition hover:bg-gold-500/15 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Decrease quantity"
             >
               −
             </button>
-            <span key={quantity} className="min-w-10 animate-pop text-center font-display font-bold text-white">
+            <span
+              key={quantity}
+              className="flex h-10 min-w-12 animate-pop items-center justify-center border-x border-gold-500/30 font-semibold text-ivory"
+            >
               {pending ? "…" : quantity}
             </span>
             <button
               type="button"
               onClick={increase}
               disabled={pending || quantity >= product.stock}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30"
+              className="flex h-10 w-10 items-center justify-center text-lg text-ivory transition hover:bg-gold-500/15 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Increase quantity"
             >
               +
@@ -79,7 +80,7 @@ function CartItem({ item, index = 0 }) {
             type="button"
             onClick={remove}
             disabled={pending}
-            className="rounded-full px-3 py-1.5 text-sm font-medium text-red-300 transition hover:bg-red-500/10 disabled:opacity-50"
+            className="text-[11px] font-semibold uppercase tracking-[0.2em] text-red-300 underline-offset-4 transition hover:underline disabled:opacity-50"
           >
             Remove
           </button>
@@ -90,7 +91,7 @@ function CartItem({ item, index = 0 }) {
             </span>
           ) : (
             quantity === product.stock && (
-              <span className="text-xs text-amber-300">Only {product.stock} in stock</span>
+              <span className="text-xs text-gold-400">Only {product.stock} in stock</span>
             )
           )}
         </div>

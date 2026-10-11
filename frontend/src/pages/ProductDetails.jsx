@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton.jsx";
+import Corners from "../components/Corners.jsx";
 import StatusMessage from "../components/StatusMessage.jsx";
 import StockBadge from "../components/StockBadge.jsx";
 import WishlistButton from "../components/WishlistButton.jsx";
@@ -8,8 +9,8 @@ import { getErrorMessage, getProductById, getWishlist } from "../services/api";
 import formatPrice from "../utils/formatPrice";
 
 const PERKS = [
-  { icon: "🚚", label: "Free delivery" },
-  { icon: "↩️", label: "7-day returns" },
+  { icon: "🚚", label: "Free express delivery" },
+  { icon: "↺", label: "7-day easy returns" },
   { icon: "🔒", label: "Secure payment" },
 ];
 
@@ -71,51 +72,50 @@ function ProductDetails() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <Link
         to="/products"
-        className="w-fit animate-fade-up text-sm font-medium text-slate-400 transition hover:text-fuchsia-300"
+        className="w-fit animate-fade-up text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-400 transition hover:text-gold-300"
       >
         ← Back to Products
       </Link>
 
-      <div className="grid gap-10 md:grid-cols-2">
+      <div className="grid gap-12 md:grid-cols-2">
         <div className="relative animate-fade-up">
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-violet-600/40 via-fuchsia-600/30 to-orange-500/30 blur-3xl" />
-          <div className="gradient-border relative rounded-[2rem] p-px">
-            <div className="group overflow-hidden rounded-[calc(2rem-1px)] bg-[#0c0916]">
+          <div className="absolute -inset-6 bg-gold-500/10 blur-3xl" />
+          <div className="gold-frame relative p-px">
+            <div className="product-stage group aspect-square">
+              <Corners />
               <img
                 src={product.image}
                 alt={product.name}
-                className="aspect-square h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                className="h-full w-full object-contain p-12 transition duration-700 group-hover:scale-105"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex animate-fade-up flex-col gap-5 [animation-delay:120ms]">
-          <span className="w-fit rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-fuchsia-300">
+        <div className="flex animate-fade-up flex-col gap-6 [animation-delay:120ms]">
+          <span className="w-fit border border-gold-500/40 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-300">
             {product.category}
           </span>
-          <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
-            {product.name}
-          </h1>
-          <div className="flex flex-wrap items-center gap-4">
-            <p className="text-gradient font-display text-4xl font-bold">{formatPrice(product.price)}</p>
+          <h1 className="font-display text-5xl font-semibold leading-[1.1] text-ivory">{product.name}</h1>
+          <div className="flex flex-wrap items-center gap-5 border-y border-gold-500/15 py-5">
+            <p className="text-gold font-display text-4xl font-semibold">{formatPrice(product.price)}</p>
             <StockBadge stock={product.stock} />
           </div>
-          <p className="text-lg leading-relaxed text-slate-400">{product.description}</p>
+          <p className="text-base leading-relaxed text-stone-400">{product.description}</p>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-px border border-gold-500/15 bg-gold-500/15">
             {PERKS.map((perk) => (
-              <div key={perk.label} className="glass rounded-2xl p-3 text-center">
-                <span className="text-xl">{perk.icon}</span>
-                <p className="mt-1 text-xs text-slate-400">{perk.label}</p>
+              <div key={perk.label} className="bg-ink-900 p-4 text-center">
+                <span className="text-lg text-gold-300">{perk.icon}</span>
+                <p className="mt-1.5 text-[10px] uppercase tracking-[0.15em] text-stone-400">{perk.label}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-auto flex flex-col gap-3 pt-2 sm:max-w-sm">
+          <div className="mt-auto flex flex-col gap-3 pt-2 sm:max-w-md">
             <AddToCartButton product={product} />
             <WishlistButton productId={product._id} initialSaved={inWishlist} />
           </div>

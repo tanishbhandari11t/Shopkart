@@ -49,7 +49,7 @@ function Login() {
       footer={
         <>
           New to ShopKart?{" "}
-          <Link to="/register" className="font-semibold text-fuchsia-300 hover:text-fuchsia-200">
+          <Link to="/register" className="font-semibold text-gold-300 underline-offset-4 hover:text-gold-200 hover:underline">
             Create an account
           </Link>
         </>
@@ -57,12 +57,12 @@ function Login() {
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
         {justRegistered && !error && (
-          <div className="animate-fade-up rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2.5 text-sm text-emerald-300">
+          <div className="animate-fade-up border border-emerald-400/30 bg-emerald-500/10 px-4 py-2.5 text-sm text-emerald-300">
             ✓ Account created successfully. Please log in.
           </div>
         )}
         {error && (
-          <div className="animate-fade-up rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
+          <div className="animate-fade-up border border-red-400/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
             {error}
           </div>
         )}
@@ -84,7 +84,7 @@ function Login() {
           autoComplete="current-password"
           placeholder="Your password"
         />
-        <button type="submit" disabled={submitting} className="btn-primary mt-2 py-3">
+        <button type="submit" disabled={submitting} className="btn-primary mt-3 py-4">
           {submitting ? "Logging in..." : "Login"}
         </button>
       </form>

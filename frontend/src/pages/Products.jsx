@@ -64,8 +64,8 @@ function Products() {
   if (loading) {
     content = (
       <div>
-        <p className="mb-4 flex items-center gap-2 text-sm text-slate-400">
-          <span className="h-3 w-3 animate-spin rounded-full border-2 border-fuchsia-400/30 border-t-fuchsia-400" />
+        <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-stone-400">
+          <span className="h-3 w-3 animate-spin border-2 border-gold-500/30 border-t-gold-400" />
           Loading products...
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -112,16 +112,16 @@ function Products() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex animate-fade-up flex-wrap items-end justify-between gap-4">
+    <div className="flex flex-col gap-10">
+      <div className="flex animate-fade-up flex-wrap items-end justify-between gap-4 border-b border-gold-500/15 pb-8">
         <div>
-          <p className="text-sm font-medium uppercase tracking-widest text-fuchsia-300">Discover</p>
-          <h1 className="mt-1 font-display text-4xl font-bold text-white sm:text-5xl">
-            Explore <span className="text-gradient">Products</span>
+          <p className="eyebrow">The Collection</p>
+          <h1 className="mt-3 font-display text-5xl font-semibold text-ivory sm:text-6xl">
+            Explore <span className="text-gold italic">Products</span>
           </h1>
         </div>
         {!loading && !error && (
-          <span className="glass rounded-full px-4 py-1.5 text-sm text-slate-300">
+          <span className="border border-gold-500/30 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-300">
             {products.length} {products.length === 1 ? "product" : "products"} found
           </span>
         )}

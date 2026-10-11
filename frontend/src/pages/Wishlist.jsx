@@ -78,14 +78,14 @@ function Wishlist() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex animate-fade-up flex-wrap items-end justify-between gap-4">
+    <div className="flex flex-col gap-10">
+      <div className="flex animate-fade-up flex-wrap items-end justify-between gap-4 border-b border-gold-500/15 pb-8">
         <div>
-          <p className="text-sm font-medium uppercase tracking-widest text-pink-300">Saved for later</p>
-          <h1 className="mt-1 font-display text-4xl font-bold text-white sm:text-5xl">
-            My <span className="text-gradient">Wishlist</span>
+          <p className="eyebrow">Saved for later</p>
+          <h1 className="mt-3 font-display text-5xl font-semibold text-ivory sm:text-6xl">
+            My <span className="text-gold italic">Wishlist</span>
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-3 text-sm text-stone-400">
             {wishlist.length} {wishlist.length === 1 ? "product" : "products"} saved
           </p>
         </div>

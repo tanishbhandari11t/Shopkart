@@ -3,10 +3,10 @@ import { useCart } from "../context/CartContext.jsx";
 
 function CartIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
       <path d="M3 4h2l2.4 11h10.2L20 8H6.2" />
-      <circle cx="9.5" cy="19.5" r="1.3" />
-      <circle cx="16.5" cy="19.5" r="1.3" />
+      <rect x="8.5" y="18.5" width="2" height="2" />
+      <rect x="15.5" y="18.5" width="2" height="2" />
     </svg>
   );
 }
@@ -29,8 +29,8 @@ function AddToCartButton({ product, className = "" }) {
   let label = "Add to Cart";
   if (pending) label = "Adding...";
   else if (outOfStock) label = "Out of Stock";
-  else if (reachedStockLimit) label = "Max quantity in cart";
-  else if (quantityInCart > 0) label = `Add Another (${quantityInCart} in cart)`;
+  else if (reachedStockLimit) label = "Max in Cart";
+  else if (quantityInCart > 0) label = `Add Another (${quantityInCart})`;
 
   return (
     <div className={className}>
@@ -41,13 +41,13 @@ function AddToCartButton({ product, className = "" }) {
         className="btn-primary w-full"
       >
         {pending ? (
-          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+          <span className="h-4 w-4 animate-spin border-2 border-ink-950/30 border-t-ink-950" />
         ) : (
           <CartIcon />
         )}
         {label}
       </button>
-      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
     </div>
   );
 }

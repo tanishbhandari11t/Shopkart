@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   withCredentials: true,
 });
 
 export const getErrorMessage = (error, fallback = "Something went wrong") => {
-  if (error && !error.response) {
+  // No response, or the dev proxy's bare 5xx when the backend is down
+  if (error && (!error.response || (error.response.status >= 500 && !error.response.data?.message))) {
     return "Can't reach the server. Make sure the backend is running on port 5000.";
   }
   return error?.response?.data?.message || fallback;

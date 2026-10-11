@@ -39,21 +39,23 @@ function WishlistButton({ productId, initialSaved = false, className = "" }) {
         type="button"
         onClick={handleClick}
         disabled={saving}
-        className={`flex w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold transition duration-300 disabled:cursor-wait disabled:opacity-70 ${
+        className={`flex w-full items-center justify-center gap-2 border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition duration-300 disabled:cursor-wait disabled:opacity-60 ${
           saved
-            ? "border-pink-400/40 bg-pink-500/15 text-pink-300 shadow-[0_0_24px_-6px_rgb(236_72_153/0.6)] hover:bg-pink-500/25"
-            : "border-white/15 bg-white/5 text-slate-200 hover:border-pink-400/40 hover:text-pink-300"
+            ? "border-gold-400/70 bg-gold-500/15 text-gold-200 hover:bg-gold-500/25"
+            : "border-white/15 text-stone-300 hover:border-gold-400/60 hover:text-gold-200"
         }`}
       >
-        <span key={String(saved)} className={saved ? "animate-pop" : ""}>
+        <span key={String(saved)} className={`text-sm tracking-normal ${saved ? "animate-pop" : ""}`}>
           {saving ? "⏳" : saved ? "♥" : "♡"}
         </span>
         {label}
       </button>
       {justAdded && !saving && (
-        <p className="mt-1.5 animate-fade-up text-xs font-medium text-pink-300">♥ Added to Wishlist</p>
+        <p className="mt-2 animate-fade-up text-[11px] font-medium uppercase tracking-[0.15em] text-gold-300">
+          ♥ Added to Wishlist
+        </p>
       )}
-      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
     </div>
   );
 }

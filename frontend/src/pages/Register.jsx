@@ -57,7 +57,7 @@ function Register() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/login" className="font-semibold text-fuchsia-300 hover:text-fuchsia-200">
+          <Link to="/login" className="font-semibold text-gold-300 underline-offset-4 hover:text-gold-200 hover:underline">
             Log in
           </Link>
         </>
@@ -65,7 +65,7 @@ function Register() {
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
         {serverError && (
-          <div className="animate-fade-up rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
+          <div className="animate-fade-up border border-red-400/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
             {serverError}
           </div>
         )}
@@ -106,7 +106,7 @@ function Register() {
           error={errors.phone}
           placeholder="9876543210"
         />
-        <button type="submit" disabled={submitting} className="btn-primary mt-2 py-3">
+        <button type="submit" disabled={submitting} className="btn-primary mt-3 py-4">
           {submitting ? "Creating account..." : "Create Account"}
         </button>
       </form>

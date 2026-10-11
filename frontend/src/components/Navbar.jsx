@@ -10,21 +10,28 @@ function NavItem({ to, label, count, onClick }) {
       to={to}
       onClick={onClick}
       className={({ isActive }) =>
-        `relative flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition duration-300 ${
-          isActive
-            ? "bg-white/10 text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.1)]"
-            : "text-slate-400 hover:bg-white/5 hover:text-white"
+        `group relative flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition duration-300 ${
+          isActive ? "text-gold-300" : "text-stone-400 hover:text-ivory"
         }`
       }
     >
-      {label}
-      {count !== undefined && count !== null && (
-        <span
-          key={count}
-          className="inline-flex h-5 min-w-5 animate-pop items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 px-1.5 text-[11px] font-bold text-white shadow-[0_0_14px_rgb(236_72_153/0.7)]"
-        >
-          {count}
-        </span>
+      {({ isActive }) => (
+        <>
+          {label}
+          {count !== undefined && count !== null && (
+            <span
+              key={count}
+              className="inline-flex h-5 min-w-5 animate-pop items-center justify-center bg-gold-500 px-1.5 text-[10px] font-bold tracking-normal text-ink-950"
+            >
+              {count}
+            </span>
+          )}
+          <span
+            className={`absolute inset-x-3 -bottom-px h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent transition-opacity duration-300 ${
+              isActive ? "opacity-100" : "opacity-0 group-hover:opacity-60"
+            }`}
+          />
+        </>
       )}
     </NavLink>
   );
@@ -70,22 +77,23 @@ function Navbar({ user }) {
   );
 
   return (
-    <header className="sticky top-0 z-30 px-4 pt-4">
-      <nav className="glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-2.5 shadow-[0_10px_40px_-15px_rgb(0_0_0/0.8)]">
+    <header className="sticky top-0 z-30 border-b border-gold-500/15 bg-ink-950/75 backdrop-blur-xl">
+      <div className="h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" />
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/home" aria-label="ShopKart home">
-          <Logo size={36} />
+          <Logo size={34} />
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">{links}</div>
+        <div className="hidden items-center gap-2 md:flex">{links}</div>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-pink-500 text-sm font-bold text-white ring-2 ring-white/10">
+        <div className="hidden items-center gap-4 md:flex">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center border border-gold-500/50 bg-gold-500/10 font-display text-sm font-semibold text-gold-300">
               {initials}
             </span>
-            <span className="text-sm text-slate-300">{user?.fullName?.split(" ")[0]}</span>
+            <span className="text-sm text-stone-300">{user?.fullName?.split(" ")[0]}</span>
           </div>
-          <button onClick={handleLogout} disabled={loggingOut} className="btn-outline py-2">
+          <button onClick={handleLogout} disabled={loggingOut} className="btn-outline px-4 py-2">
             {loggingOut ? "Logging out..." : "Logout"}
           </button>
         </div>
@@ -100,9 +108,9 @@ function Navbar({ user }) {
       </nav>
 
       {menuOpen && (
-        <div className="glass mx-auto mt-2 flex max-w-6xl animate-fade-up flex-col gap-1 rounded-2xl p-3 md:hidden">
+        <div className="flex animate-fade-up flex-col gap-1 border-t border-gold-500/15 px-6 py-4 md:hidden">
           {links}
-          <button onClick={handleLogout} disabled={loggingOut} className="btn-outline mt-2">
+          <button onClick={handleLogout} disabled={loggingOut} className="btn-outline mt-3">
             {loggingOut ? "Logging out..." : "Logout"}
           </button>
         </div>

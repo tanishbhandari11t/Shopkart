@@ -46,7 +46,7 @@ function ProtectedRoute() {
     <CartProvider>
       <AuroraBackground />
       <Navbar user={user} />
-      <main className="mx-auto max-w-6xl px-4 pb-16 pt-8">
+      <main className="mx-auto max-w-7xl px-6 pb-20 pt-10">
         <Outlet context={{ user }} />
       </main>
     </CartProvider>

@@ -1,21 +1,23 @@
 import { Link, useOutletContext } from "react-router-dom";
+import Corners from "../components/Corners.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import formatPrice from "../utils/formatPrice";
 
 const CATEGORY_TILES = [
-  { name: "Electronics", emoji: "⚡", glow: "from-violet-500/30" },
-  { name: "Fashion", emoji: "👟", glow: "from-pink-500/30" },
-  { name: "Books", emoji: "📚", glow: "from-amber-500/30" },
-  { name: "Home", emoji: "🛋️", glow: "from-cyan-500/30" },
+  {
+    name: "Electronics",
+    image: "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp",
+  },
+  {
+    name: "Fashion",
+    image: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp",
+  },
+  { name: "Books", image: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg" },
+  { name: "Home", image: "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp" },
 ];
 
-const FLOATING = [
-  { emoji: "🎧", className: "right-[30%] top-6", tilt: "-8deg", delay: "0s" },
-  { emoji: "⌨️", className: "right-[6%] top-12", tilt: "10deg", delay: "-1.5s" },
-  { emoji: "👟", className: "right-[20%] bottom-6", tilt: "6deg", delay: "-3s" },
-  { emoji: "📚", className: "right-[4%] bottom-10", tilt: "-6deg", delay: "-4.5s" },
-];
+const HERO_IMAGE = "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/thumbnail.webp";
 
 function Home() {
   const { user } = useOutletContext();
@@ -35,106 +37,114 @@ function Home() {
   ];
 
   return (
-    <div className="flex flex-col gap-8">
-      <section className="gradient-border animate-fade-up rounded-[2rem] p-px">
-        <div className="relative overflow-hidden rounded-[calc(2rem-1px)] bg-[#0c0916]/90 p-8 sm:p-12">
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-fuchsia-600/30 blur-3xl" />
-          <div className="absolute -bottom-24 left-10 h-64 w-64 rounded-full bg-violet-600/25 blur-3xl" />
-
-          {FLOATING.map((item) => (
-            <span
-              key={item.emoji}
-              className={`glass absolute hidden h-16 w-16 animate-float items-center justify-center rounded-2xl text-3xl shadow-2xl lg:flex ${item.className}`}
-              style={{ "--tilt": item.tilt, animationDelay: item.delay }}
-            >
-              {item.emoji}
-            </span>
-          ))}
-
-          <div className="relative max-w-xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-widest text-slate-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-              Welcome back
-            </p>
-            <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-white sm:text-6xl">
-              Hello, <span className="text-gradient">{user.fullName.split(" ")[0]}</span>! 👋
+    <div className="flex flex-col gap-10">
+      <section className="gold-frame animate-fade-up p-px">
+        <div className="group relative grid overflow-hidden bg-ink-900 lg:grid-cols-[1.3fr_1fr]">
+          <Corners />
+          <div className="relative p-10 sm:p-14">
+            <p className="eyebrow">Welcome back</p>
+            <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] text-ivory sm:text-6xl">
+              Hello, <span className="text-gold italic">{user.fullName.split(" ")[0]}</span>.
             </h1>
-            <p className="mt-4 text-lg text-slate-400">
-              Your next favourite thing is one click away. Explore fresh drops, save what you love and check out in seconds.
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-stone-400">
+              Discover this season's curated collection — iconic timepieces, flagship tech and timeless essentials,
+              hand-picked for you.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/products" className="btn-primary px-6 py-3 text-base">
-                Start Shopping →
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link to="/products" className="btn-primary px-8 py-4">
+                Explore Collection →
               </Link>
-              <Link to="/wishlist" className="btn-outline px-6 py-3 text-base">
+              <Link to="/wishlist" className="btn-outline px-8 py-4">
                 ♥ My Wishlist
               </Link>
+            </div>
+          </div>
+
+          <div className="product-stage hidden min-h-80 lg:block">
+            <img
+              src={HERO_IMAGE}
+              alt="Rolex Submariner"
+              className="absolute inset-0 h-full w-full animate-float object-contain p-10"
+            />
+            <div className="absolute bottom-0 left-0 bg-ink-950 px-5 py-3">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500">Featured</p>
+              <p className="font-display text-lg text-ivory">Rolex Submariner</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-3">
+      <section className="grid gap-px border border-gold-500/15 bg-gold-500/15 sm:grid-cols-3">
         {stats.map((stat, i) => (
           <SpotlightCard
             key={stat.label}
-            className="glass animate-fade-up rounded-3xl p-6"
+            className="animate-fade-up bg-ink-900 p-8"
             style={{ animationDelay: `${150 + i * 80}ms` }}
           >
-            <p className="text-sm text-slate-400">{stat.label}</p>
-            <p className="mt-2 font-display text-3xl font-bold text-white">{stat.value}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-500">{stat.label}</p>
+            <p className="mt-3 font-display text-4xl font-semibold text-gold-300">{stat.value}</p>
           </SpotlightCard>
         ))}
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <SpotlightCard
-          as="section"
-          className="glass animate-fade-up rounded-3xl p-6 [animation-delay:300ms] lg:col-span-2"
-        >
-          <h2 className="font-display text-xl font-semibold text-white">My Profile</h2>
-          <div className="mt-6 flex items-center gap-5">
-            <div className="relative">
-              <div className="absolute -inset-1 animate-[spin_5s_linear_infinite] rounded-full bg-[conic-gradient(#8b5cf6,#ec4899,#f97316,#8b5cf6)] blur-[2px]" />
-              <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-[#0c0916] font-display text-2xl font-bold text-white">
-                {initials}
+      <section className="animate-fade-up [animation-delay:250ms]">
+        <div className="mb-6 flex items-end justify-between">
+          <div>
+            <p className="eyebrow">Collections</p>
+            <h2 className="mt-2 font-display text-3xl font-semibold text-ivory">Shop by Category</h2>
+          </div>
+          <Link to="/products" className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400 hover:text-gold-200">
+            View all →
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+          {CATEGORY_TILES.map((tile) => (
+            <Link
+              key={tile.name}
+              to={`/products?category=${tile.name}`}
+              className="group relative block border border-gold-500/15 transition duration-500 hover:-translate-y-1 hover:border-gold-500/50"
+            >
+              <Corners />
+              <div className="product-stage aspect-square">
+                <img
+                  src={tile.image}
+                  alt={tile.name}
+                  className="h-full w-full object-contain p-8 transition duration-700 group-hover:scale-110"
+                />
               </div>
+              <div className="flex items-center justify-between bg-ink-900 px-5 py-4">
+                <span className="font-display text-lg text-ivory">{tile.name}</span>
+                <span className="text-gold-400 transition group-hover:translate-x-1">→</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <SpotlightCard as="section" className="panel group animate-fade-up p-8 [animation-delay:350ms]">
+        <Corners />
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-5">
+            <div className="flex h-20 w-20 items-center justify-center border border-gold-500/60 bg-gold-500/10 font-display text-3xl font-semibold text-gold-300">
+              {initials}
             </div>
             <div>
-              <p className="font-display text-2xl font-semibold text-white">{user.fullName}</p>
-              <p className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-2.5 py-0.5 text-xs font-medium text-fuchsia-300">
-                ✦ ShopKart Member
-              </p>
+              <p className="eyebrow">My Profile</p>
+              <p className="mt-2 font-display text-3xl font-semibold text-ivory">{user.fullName}</p>
             </div>
           </div>
-          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
-              <dt className="text-xs uppercase tracking-wider text-slate-500">Email</dt>
-              <dd className="mt-1 break-all font-medium text-white">{user.email}</dd>
+          <dl className="grid gap-px border border-gold-500/15 bg-gold-500/15 sm:grid-cols-2 md:min-w-[28rem]">
+            <div className="bg-ink-900 p-5">
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Email</dt>
+              <dd className="mt-1.5 break-all text-ivory">{user.email}</dd>
             </div>
-            <div className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
-              <dt className="text-xs uppercase tracking-wider text-slate-500">Phone Number</dt>
-              <dd className="mt-1 font-medium text-white">{user.phone}</dd>
+            <div className="bg-ink-900 p-5">
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Phone Number</dt>
+              <dd className="mt-1.5 text-ivory">{user.phone}</dd>
             </div>
           </dl>
-        </SpotlightCard>
-
-        <SpotlightCard as="section" className="glass animate-fade-up rounded-3xl p-6 [animation-delay:380ms]">
-          <h2 className="font-display text-xl font-semibold text-white">Shop by Category</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            {CATEGORY_TILES.map((tile) => (
-              <Link
-                key={tile.name}
-                to={`/products?category=${tile.name}`}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${tile.glow} to-transparent p-4 transition duration-300 hover:-translate-y-1 hover:border-white/25`}
-              >
-                <span className="block text-3xl transition duration-300 group-hover:scale-125">{tile.emoji}</span>
-                <span className="mt-3 block text-sm font-semibold text-white">{tile.name}</span>
-              </Link>
-            ))}
-          </div>
-        </SpotlightCard>
-      </div>
+        </div>
+      </SpotlightCard>
     </div>
   );
 }
